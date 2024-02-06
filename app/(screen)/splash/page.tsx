@@ -2,7 +2,7 @@
 import { Fragment } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { BellIcon } from '@heroicons/react/outline'
-import sec from '@/app/comps/sec';
+
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -89,15 +89,6 @@ export default function page() {
 
                                 </section>
                             </div>
-
-                            <section className='mt-2 py-4'>
-                                <div className='flex h-full cursor-pointer items-center whitespace-nowrap'>
-                                    <span className='animate-loopL'>Show Reel 2024&copy; Show Reel 2024&copy; &nbsp;</span>
-                                    <span className='animate-loopL'>Show Reel 2024&copy; Show Reel 2024&copy; &nbsp;</span>
-                                </div>
-                            </section>
-
-
 
 
                         </>
