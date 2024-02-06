@@ -2,7 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+@font-face {
+  font-family: regularfont;
+  src: url('fonts/Satoshi-Regular.eot');
+  src: url('fonts/Satoshi-Regular.ttf');
+  src: url('fonts/Satoshi-Regular.woff');
+  src: url('fonts/Satoshi-Regular.woff2');
+
+}
+
+@font-face {
+  font-family: boldfont;
+  src: url('fonts/Satoshi-Bold.eot');
+  src: url('fonts/Satoshi-Bold.ttf');
+  src: url('fonts/Satoshi-Bold.woff');
+  src: url('fonts/Satoshi-Bold.woff2');
+}
+
+
+
+* {
+  font-family: regularfont !important;
+}
+
+.main {
+  font-family: boldfont !important;
+}
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +64,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */
