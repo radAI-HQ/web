@@ -1,4 +1,4 @@
-import Landing from "../app/(screen)/splash/page"
+import Landing from "./(screen)/splash/page"
 
 export default function Home() {
   return (

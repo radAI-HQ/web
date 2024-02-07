@@ -1,7 +1,7 @@
 'use client';
-import { Fragment } from 'react'
 import { Disclosure } from '@headlessui/react'
-import { BellIcon } from '@heroicons/react/outline'
+import { BellIcon, ArrowRightIcon } from '@heroicons/react/outline'
+import Link from 'next/link';
 
 
 function classNames(...classes: any) {
@@ -10,7 +10,7 @@ function classNames(...classes: any) {
 export default function page() {
     return (
         <>
-            <div className='relative max-w-7xl'>
+            <div className='relative flex flex-col max-w-9xl'>
                 <img
                     className="block h-96 w-full"
                     src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Frame_acOD27yoZ.png?updatedAt=1706944067529"
@@ -21,7 +21,7 @@ export default function page() {
                         <>
                             <div className='py-2'>
                             </div>
-                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="max-w-9xl flex  flex-col mx-auto px-4 sm:px-6 lg:px-8 relative">
                                 <div className="flex justify-between h-24">
                                     <div className="flex">
                                         <div className="flex-shrink-0 flex items-center">
@@ -75,27 +75,32 @@ export default function page() {
                                         Your gateway to instant radiology insights—
                                     </p>
                                 </section>
-
-                                <section className=' absolute bottom-2 flex justify-center items-center flex-col w-full '>
-                                    <div>
-                                        <button
-                                            type="button"
-                                            className="inline-flex items-center px-6 py-3 w-full border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        >
-                                            Next
-                                        </button>
-                                    </div>
-
-
+                                <section className='mt-2 py-4 inline-flex  justify-end items-end'>
+                                    <h2 className="text-5xl font-extrabold tracking-tight sm:text-4xl">Your AI Doctor<br /> Companion.</h2>
+                                    <img
+                                        className=" h-10 w-10 "
+                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/teenyicons_chatbot-solid%20(1)_dcUdxNc1i.png?updatedAt=1706944461312"
+                                        alt="radai"
+                                    />
                                 </section>
                             </div>
-
-
                         </>
                     )}
                 </Disclosure>
 
+                <div className='mx-12 mt-64 flex justify-center bottom'>
+                    <div className='flex justify-center items-center flex-col w-full'>
+                        <Link href="/home" className='inline-flex font-bold justify-center items-center text-center shadow-lg px-6 py-3 w-full border border-transparent text-base  rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                            <button
+                                type="button"
+                                className=" inline-flex"
+                            >
+                                <span className='px-2'> Start </span><ArrowRightIcon className="h-6 w-6" aria-hidden="true" />
+                            </button>
+                        </Link>
 
+                    </div>
+                </div>
             </div>
         </>
     )
