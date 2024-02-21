@@ -8,9 +8,7 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 const page = () => {
-
     return (
-
         <div className='flex justify-center items-center max-w-9xl max-w-9xl flex-col mx-auto px-4 sm:px-6 lg:px-8  '>
             <form className='w-full  bg-white shadow-lg py-3 px-5 rounded-lg'>
                 <Tab.Group>
