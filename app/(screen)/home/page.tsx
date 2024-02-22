@@ -1,5 +1,5 @@
 'use client';
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
     HomeIcon,
@@ -18,7 +18,7 @@ const navigation = [
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
-const page = () => {
+const Page = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     return (
         <>
@@ -244,4 +244,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
