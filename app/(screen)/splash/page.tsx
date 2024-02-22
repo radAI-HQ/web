@@ -12,7 +12,7 @@ export default function page() {
         <>
             <div className='relative flex flex-col max-w-9xl'>
                 <img
-                    className="block h-96 w-full"
+                    className="block h-96 w-full z-10 bg-transparent"
                     src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Frame_acOD27yoZ.png?updatedAt=1706944067529"
                     alt="radai"
                 />
@@ -44,13 +44,7 @@ export default function page() {
                                             />
                                         </div>
 
-                                        <button
-                                            type="button"
-                                            className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                        >
-                                            <span className="sr-only">View notifications</span>
-                                            <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                        </button>
+
 
                                     </div>
                                     <div className="-mr-2 flex items-center sm:hidden">
@@ -68,7 +62,7 @@ export default function page() {
                                 <section className='mt-2 py-4'>
                                     <img
                                         className="block md:h-1/2 md:w-1/2"
-                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Group%2036_h_c3SbK9M.png?updatedAt=1706944089177"
+                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Group%2036%20(1)_35dAlF8YM.png?updatedAt=1708599967256"
                                         alt="radai"
                                     />
                                     <p className='text-gray-400 py-2 text-lg'>
@@ -76,7 +70,7 @@ export default function page() {
                                     </p>
                                 </section>
                                 <section className='mt-2 py-4 inline-flex  justify-end items-end'>
-                                    <h2 className="text-5xl font-extrabold tracking-tight sm:text-4xl">Your AI Doctor<br /> Companion.</h2>
+                                    <h2 className="text-5xl font-extrabold text-white  tracking-tight sm:text-4xl">Your AI Doctor<br /> Companion.</h2>
                                     <img
                                         className=" h-10 w-10 "
                                         src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/teenyicons_chatbot-solid%20(1)_dcUdxNc1i.png?updatedAt=1706944461312"
@@ -88,14 +82,14 @@ export default function page() {
                     )}
                 </Disclosure>
 
-                <div className='mx-12 mt-64 flex justify-center bottom'>
+                <div className='mx-12 mt-64 flex justify-center bottom z-50'>
                     <div className='flex justify-center items-center flex-col w-full'>
-                        <Link href="/home" className='inline-flex font-bold justify-center items-center text-center shadow-lg px-6 py-3 w-full border border-transparent text-base  rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
+                        <Link href="/home" className='inline-flex font-bold justify-center items-center text-center shadow-lg px-6 py-4 w-full border border-transparent text-base  rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                             <button
                                 type="button"
                                 className=" inline-flex"
                             >
-                                <span className='px-2'> Start </span><ArrowRightIcon className="h-6 w-6" aria-hidden="true" />
+                                <span className='px-2 bg-transparent '> Start </span><ArrowRightIcon className="h-6 w-6  bg-transparent" aria-hidden="true" />
                             </button>
                         </Link>
 

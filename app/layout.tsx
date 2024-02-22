@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "radai",
-  description: "The AI Doctor for Radiologists",
+  title: "RadAI - AI Doctor for Radiologists",
+  description: " RadAI is an AI Doctor for Radiologists. It is a gateway to instant radiology insights. It is your AI Doctor Companion.",
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -13,7 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
+      <body>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        {children}
+      </body>
     </html>
   );
 }
