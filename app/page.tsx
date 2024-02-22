@@ -4,7 +4,6 @@ import Landing from "./(screen)/splash/page"
 
 export default function Home() {
   useEffect(() => {
-
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {

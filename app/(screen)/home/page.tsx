@@ -2,12 +2,15 @@
 import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
+    ArrowUpIcon,
     HomeIcon,
     MapIcon,
     MenuAlt2Icon,
     SpeakerphoneIcon,
     XIcon,
 } from '@heroicons/react/outline'
+import { TypeAnimation } from 'react-type-animation';
+import { RadialTextGradient } from "react-text-gradients-and-animations";
 
 const navigation = [
     { name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -20,6 +23,22 @@ function classNames(...classes: any) {
 }
 const Page = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [value, setValue] = useState({
+        text: ""
+    })
+
+    const { text } = value
+    const onChange = (e: any) => {
+        setValue({ ...value, [e.target.name]: e.target.value });
+    };
+
+
+    const onSubmit = (e: any) => {
+        e.preventDefault();
+
+    }
+
+
     return (
         <>
             <>
@@ -229,9 +248,66 @@ const Page = () => {
                             </div>
                         </div>
                         <div className="">
-                            <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                                <div className=" py-6 px-4 sm:px-6 lg:px-8 text-white">
-                                    <p className='text-white'>Hello world</p>
+                            <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 overflow-hidden">
+                                <div className=" py-6 px-4 sm:px-6 lg:px-8 text-white -z-10 ">
+                                    <RadialTextGradient
+                                        className=' text-5xl my-4 lg:text-8xl font-bold '
+                                        shape={"ellipse"}
+                                        position={"left"}
+                                        colors={["#6366F1", "#121212", "#363AED"]}
+                                        animate={true}
+                                        animateDirection={"horizontal"}
+                                        animateDuration={20}
+                                    >
+                                        AI Doctor for Radiologist...
+                                    </RadialTextGradient>
+
+                                </div>
+                                <div>
+                                    <TypeAnimation
+                                        preRenderFirstString={true}
+                                        sequence={[
+                                            500,
+                                            'AI Model, Prompted for very fast information about Radiology.',
+                                            1000,
+                                            'AI Model, Connecting Radiologist Together.',
+                                            1000,
+                                            'AI Model, Trained Models with X-Ray & Tumor Scans.',
+                                            1000,
+                                            'AI Model, Realiable and Futuristic AI Technology.',
+                                            500,
+                                        ]}
+                                        speed={60}
+                                        style={{ fontSize: '1em' }}
+                                        repeat={Infinity}
+                                        className='py-4 text-white'
+                                    />
+                                </div>
+                                <div className='fixed bottom-0 w-5/6 flex justify-center items-center  py-4 px-4 sm:px-6'>
+                                    <div className="border w-5/6  rounded-xl shadow-sm overflow-hidden border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                                        <label htmlFor="description" className="sr-only">
+                                            Ask What you need to know
+                                        </label>
+                                        <textarea
+                                            rows={2}
+                                            name="text"
+                                            onChange={onChange}
+                                            value={text}
+                                            id="text"
+                                            className=" border-3 py-2 px-2 w-full outline-none  placeholder-white  sm:text-sm text-white"
+                                            placeholder="Your AI Doctor Companion..."
+                                            defaultValue={''}
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={onSubmit}
+                                        className="inline-flex items-center bg-transparent cursor-pointer px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white outline-none "
+                                    >
+                                        <ArrowUpIcon className='w-8 h-8 text-white  bg-transparent cursor-pointer ' />
+                                    </button>
+
+
                                 </div>
                             </div>
 
