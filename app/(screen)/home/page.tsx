@@ -253,7 +253,7 @@ const Page = () => {
                             <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 overflow-hidden">
                                 <div className=" py-6 px-4 sm:px-6 lg:px-8 text-white -z-10 ">
                                     <RadialTextGradient
-                                        className='text-6xl my-4 lg:text-9xl font-extrabold '
+                                        className='text-4xl font-bold my-4 lg:text-9xl lg:font-extrabold '
                                         shape={"ellipse"}
                                         position={"left"}
                                         colors={["#f1f1f1", "#121212", "#363AED"]}
