@@ -13,9 +13,9 @@ import { TypeAnimation } from 'react-type-animation';
 import { RadialTextGradient } from "react-text-gradients-and-animations";
 
 const navigation = [
-    { name: 'Home', href: '#', icon: HomeIcon, current: true },
+    { name: 'Home', href: '/home', icon: HomeIcon, current: true },
     { name: 'Announcements', href: '#', icon: SpeakerphoneIcon, current: false },
-    { name: 'Map', href: '#', icon: MapIcon, current: false },
+    { name: 'Map', href: 'https://www.google.com/maps/dir/6.6207907,3.3086788/Radiology,+1-5+Oba+Akinjobi+Way,+Ikeja,+Lagos+101233,+Lagos/@6.6072748,3.3050182,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x103b9221b8465467:0x48a958aba0f0d779!2m2!1d3.3422326!2d6.5901223?entry=ttu', icon: MapIcon, current: false },
 ]
 
 function classNames(...classes: any) {
@@ -109,6 +109,7 @@ const Page = () => {
                                                     <a
                                                         key={item.name}
                                                         href={item.href}
+                                                        target='_blank'
                                                         className={classNames(
                                                             item.current
                                                                 ? 'text-white'
@@ -179,6 +180,7 @@ const Page = () => {
                                             {navigation.map((item) => (
                                                 <a
                                                     key={item.name}
+                                                    target='_blank'
                                                     href={item.href}
                                                     className={classNames(
                                                         item.current
