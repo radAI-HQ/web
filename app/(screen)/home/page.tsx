@@ -251,10 +251,10 @@ const Page = () => {
                             <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 overflow-hidden">
                                 <div className=" py-6 px-4 sm:px-6 lg:px-8 text-white -z-10 ">
                                     <RadialTextGradient
-                                        className=' text-5xl my-4 lg:text-8xl font-bold '
+                                        className='text-6xl my-4 lg:text-9xl font-extrabold '
                                         shape={"ellipse"}
                                         position={"left"}
-                                        colors={["#6366F1", "#121212", "#363AED"]}
+                                        colors={["#f1f1f1", "#121212", "#363AED"]}
                                         animate={true}
                                         animateDirection={"horizontal"}
                                         animateDuration={20}
@@ -268,7 +268,7 @@ const Page = () => {
                                         preRenderFirstString={true}
                                         sequence={[
                                             500,
-                                            'AI Model, Prompted for very fast information about Radiology.',
+                                            'AI Model, Prompt anything Radiology.',
                                             1000,
                                             'AI Model, Connecting Radiologist Together.',
                                             1000,
@@ -280,11 +280,11 @@ const Page = () => {
                                         speed={60}
                                         style={{ fontSize: '1em' }}
                                         repeat={Infinity}
-                                        className='py-4 text-white'
+                                        className='py-4 text-white bg-transparent'
                                     />
                                 </div>
-                                <div className='fixed bottom-0 w-5/6 flex justify-center items-center  py-4 px-4 sm:px-6'>
-                                    <div className="border w-5/6  rounded-xl shadow-sm overflow-hidden border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                                <div className='fixed bottom-0 w-full lg:w-5/6 flex justify-center items-center  py-4 px-4 sm:px-6'>
+                                    <div className="border-2 w-full lg:w-5/6  rounded-xl shadow-sm overflow-hidden border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
                                         <label htmlFor="description" className="sr-only">
                                             Ask What you need to know
                                         </label>
@@ -302,7 +302,7 @@ const Page = () => {
                                     <button
                                         type="button"
                                         onClick={onSubmit}
-                                        className="inline-flex items-center bg-transparent cursor-pointer px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white outline-none "
+                                        className="inline-flex mx-2 items-center bg-transparent border-2 border-indigo-500  cursor-pointer px-6 py-4 text-base font-medium rounded-md shadow-sm text-white outline-none "
                                     >
                                         <ArrowUpIcon className='w-8 h-8 text-white  bg-transparent cursor-pointer ' />
                                     </button>
