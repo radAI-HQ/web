@@ -1,18 +1,15 @@
 'use client';
-import React, { useEffect } from 'react';
 import { Disclosure } from '@headlessui/react'
 import { ArrowRightIcon } from '@heroicons/react/outline'
 import Link from 'next/link';
-
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 export default function page() {
-
     return (
         <>
-            <div className='relative flex flex-col max-w-9xl bg-[#121212]'>
+            <div className='relative flex flex-col max-w-9xl'>
                 <img
                     className="block h-96 w-full z-10 bg-transparent"
                     src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Frame_acOD27yoZ.png?updatedAt=1706944067529"
@@ -84,7 +81,7 @@ export default function page() {
                     )}
                 </Disclosure>
 
-                <div className='mx-12 mt-64 flex justify-center bottom z-50 bg-[#121212]'>
+                <div className='mx-12 mt-64 flex justify-center bottom z-50'>
                     <div className='flex justify-center items-center flex-col w-full'>
                         <Link href="/home" className='inline-flex font-bold justify-center items-center text-center shadow-lg px-6 py-4 w-full border border-transparent text-base  rounded-full text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                             <button
