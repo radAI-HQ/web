@@ -11,6 +11,9 @@ import {
 } from '@heroicons/react/outline'
 import { TypeAnimation } from 'react-type-animation';
 import { RadialTextGradient } from "react-text-gradients-and-animations";
+import axios from 'axios';
+import { useAppDispatch, useAppSelector } from "../../../features/store"
+import { showItem } from '@/features/utils';
 
 const navigation = [
     { name: 'Home', href: '/home', icon: HomeIcon, current: true },
@@ -23,21 +26,59 @@ function classNames(...classes: any) {
 }
 const Page = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [user, setUser] = useState(false)
+    const [bot, setBot] = useState(false)
+
+
+
     const [value, setValue] = useState({
         text: ""
     })
+
+
+    const [display, setDisplay] = useState("")
+    const [response, setResponse] = useState("")
+
 
     const { text } = value
     const onChange = (e: any) => {
         setValue({ ...value, [e.target.name]: e.target.value });
     };
 
-
     const onSubmit = (e: any) => {
+        setValue({ text: '' });
+        setUser(true)
+        setDisplay(text)
         e.preventDefault();
 
-    }
 
+        let data = JSON.stringify({
+            "session_id": process.env.NEXT_PUBLIC_SESSION_ID,
+            "question": text
+        });
+
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: `https://api.autogon.ai/api/v1/services/chatbot/${process.env.NEXT_PUBLIC_AGENT_ID}/chat/`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+                setBot(true)
+                setResponse(JSON.stringify(response.data.data.bot_response))
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+            });
+
+
+    }
 
     return (
         <>
@@ -141,7 +182,7 @@ const Page = () => {
                                                     />
                                                 </div>
                                                 <div className="ml-3">
-                                                    <p className="text-base font-medium text-white group-hover:text-white">Radai</p>
+                                                    <p className="text-base font-medium text-white group-hover:text-white">Radai User</p>
                                                     <p className="text-sm font-medium text-white group-hover:text-white">View </p>
                                                 </div>
                                             </div>
@@ -213,7 +254,7 @@ const Page = () => {
                                                 />
                                             </div>
                                             <div className="ml-3">
-                                                <p className="text-sm font-medium text-white">Radai</p>
+                                                <p className="text-sm font-medium text-white">Radai User</p>
                                                 <p className="text-xs font-medium text-white">View</p>
                                             </div>
                                         </div>
@@ -253,7 +294,7 @@ const Page = () => {
                             <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 overflow-hidden">
                                 <div className=" py-6 px-4 sm:px-6 lg:px-8 text-white -z-10 ">
                                     <RadialTextGradient
-                                        className='text-4xl font-bold my-4 lg:text-9xl lg:font-extrabold '
+                                        className='text-3xl font-bold my-4 lg:text-6xl lg:font-extrabold fade'
                                         shape={"ellipse"}
                                         position={"left"}
                                         colors={["#f1f1f1", "#121212", "#363AED"]}
@@ -261,9 +302,8 @@ const Page = () => {
                                         animateDirection={"horizontal"}
                                         animateDuration={20}
                                     >
-                                        AI Doctor for Radiologist...
+                                        Your Radiology AI Companion..
                                     </RadialTextGradient>
-
                                 </div>
                                 <div>
                                     <TypeAnimation
@@ -285,6 +325,60 @@ const Page = () => {
                                         className='py-4 text-white bg-transparent'
                                     />
                                 </div>
+
+                                <div>
+                                    {user && (
+                                        <div className="left-0 bg-transparent  m-2 max-w-7xl">
+                                            <dt>
+                                                <div className="flex items-center justify-start  w-full rounded-md text-white z-50">
+                                                    <img
+                                                        className="inline-block h-10 w-10 rounded-full"
+                                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/image%20118_iuFOihe50.png?updatedAt=1708616403272"
+                                                        alt="radai"
+                                                    />
+                                                    <p className="mx-2 text-base leading-6 font-medium text-white">{display}</p>
+                                                </div>
+
+                                            </dt>
+
+                                        </div>
+                                    )}
+
+
+                                    {bot && (
+                                        <div className="right-0  bg-transparent z-50 m-2 max-w-7xl">
+                                            <dt>
+                                                <div className="flex items-center justify-end rounded-md text-white  w-full">
+                                                    <img
+                                                        className="inline-block h-10 w-10 rounded-full"
+                                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Light%20Version_qIXTVimd7.png?updatedAt=1708679749597"
+                                                        alt="radai"
+                                                    />
+                                                    <p className="mx-2 text-base leading-6 font-medium text-white">
+                                                        <TypeAnimation
+                                                            preRenderFirstString={true}
+                                                            sequence={[
+                                                                500,
+                                                                `${response}`,
+                                                            ]}
+                                                            speed={60}
+                                                            style={{ fontSize: '1em' }}
+                                                            repeat={Infinity}
+                                                            className='py-4 text-white bg-transparent'
+                                                        />
+
+
+                                                    </p>
+                                                </div>
+
+                                            </dt>
+
+                                        </div>
+                                    )}
+
+                                </div>
+
+
                                 <div className='fixed bottom-0 w-full lg:w-5/6 flex justify-center items-center  py-4 px-4 sm:px-6'>
                                     <div className="border-2 w-full lg:w-5/6  rounded-xl shadow-sm overflow-hidden border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
                                         <label htmlFor="description" className="sr-only">
@@ -316,6 +410,7 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
+
             </>
 
         </>

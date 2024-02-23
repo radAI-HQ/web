@@ -3,9 +3,6 @@ import { Disclosure } from '@headlessui/react'
 import { ArrowRightIcon } from '@heroicons/react/outline'
 import Link from 'next/link';
 
-function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
-}
 export default function page() {
     return (
         <>

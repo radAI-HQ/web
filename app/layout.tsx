@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { GlobalProvider } from "@/features/provider";
 
 export const metadata: Metadata = {
   title: "RadAI - AI Doctor for Radiologists",
@@ -20,7 +21,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <link rel="icon" href="./favicon.ico" sizes="any" />
-        {children}
+        <GlobalProvider>
+          {children}
+        </GlobalProvider>
       </body>
     </html>
   );
