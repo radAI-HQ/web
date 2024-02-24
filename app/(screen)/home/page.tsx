@@ -308,7 +308,7 @@ const Page = () => {
                                         animateDirection={"horizontal"}
                                         animateDuration={20}
                                     >
-                                        Your Radiology AI Companion..
+                                        ...Anything Radiology
                                     </RadialTextGradient>
                                 </div>
                                 <div>
