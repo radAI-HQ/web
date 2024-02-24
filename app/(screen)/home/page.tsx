@@ -333,7 +333,7 @@ const Page = () => {
                                             500,
                                             'AI Model, Prompt for anything Radiology.',
                                             1000,
-                                            'AI Model, Trained Models with X-Ray & Tumor Scans.',
+                                            'AI Model, Trained with X-Ray & Tumor Scans.',
                                         ]}
                                         speed={60}
                                         style={{ fontSize: '1em' }}
