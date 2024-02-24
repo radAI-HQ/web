@@ -345,30 +345,23 @@ const Page = () => {
                                                                 alt="radai"
                                                             />
                                                             <div className='p-2 rounded-md'>
-                                                                <p className="mx-2 text-sm leading-6 font-medium text-white">{e.main.message}</p>
+                                                                <p className="mx-2 text-sm leading-6 font-medium text-white">{e.main.message.replaceAll("*", "")}</p>
                                                             </div>
                                                         </div>
                                                     </Suspense>
                                                     <Suspense fallback={<div />} key={e.resbot.type}>
-                                                        <div className='flex items-center justify-end rounded-md text-white w-full' >
+                                                        <div className='flex lg:items-center justify-start  lg:flex-row lg:justify-end rounded-md text-white w-full py-2' >
                                                             <img
                                                                 className="inline-block h-10 w-10 rounded-full"
                                                                 src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Light%20Version_qIXTVimd7.png?updatedAt=1708679749597"
                                                                 alt="radai"
                                                             />
-                                                            <p className=" p-3 rounded-md mx-2 text-sm leading-6 font-medium text-white">
-                                                                <TypeAnimation
-                                                                    preRenderFirstString={true}
-                                                                    sequence={[
-                                                                        500,
-                                                                        `${e.resbot.message}`,
-                                                                    ]}
-                                                                    speed={60}
-                                                                    style={{ fontSize: '1em' }}
-                                                                    repeat={Infinity}
-                                                                    className='py-4 text-white bg-transparent'
-                                                                />
-                                                            </p>
+                                                            <div className='p-2 rounded-md'>
+                                                                <p className=" p-3 text-sm leading-6 font-medium text-white">
+                                                                    {e.resbot.message.split('\n\n').map(obj => JSON.parse(obj.trim()))}
+
+                                                                </p>
+                                                            </div>
                                                         </div>
 
                                                     </Suspense>
@@ -385,8 +378,6 @@ const Page = () => {
 
 
                                 </div>
-
-
 
                                 <div className='fixed bottom-0 w-full lg:w-5/6 flex justify-center items-center  py-4 px-4 sm:px-6'>
                                     <div className="border-2 w-full lg:w-5/6  rounded-xl shadow-sm overflow-hidden border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
@@ -419,9 +410,7 @@ const Page = () => {
                         </div>
                     </div>
                 </div>
-
             </>
-
         </>
     )
 }
