@@ -14,16 +14,10 @@ const initialState: UtilSliceState = {
     show: null,
     chat: [],
     videos: [
-        { "CPR First Aid AED": "https://youtu.be/xtuWk0O9bKk" },
-        {
-            "ASHI &amp; MEDIC First Aid | Sudden Cardiac Arrest":
-                "https://youtu.be/ktgQIKgljpA",
-        },
-        { "First Aid : CPR Rescue Breaths": "https://youtu.be/Lbh7g-m_bwQ" },
-        {
-            "CPR in Action | A 3D look inside the body":
-                "https://youtu.be/DUaxt8OlT3o",
-        },
+        { title: "Using artificial intelligence in radiology", src: "https://www.youtube.com/embed/dCDuMyzWS8Q?si=waOGfE5zIb8iq-M1" },
+        { title: "Advanced Radiological Equipments", src: "https://www.youtube.com/embed/-633zoLcHHo?si=AlHxfYGSrMuhPe4O" },
+        { title: "Radiology Best Resources", src: "https://www.youtube.com/embed/X_JCZtAa0ow?si=gOeIy9uhuaFmLG-I" },
+
     ],
 
 }

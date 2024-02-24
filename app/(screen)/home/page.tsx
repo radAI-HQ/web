@@ -8,19 +8,25 @@ import {
     SpeakerphoneIcon,
     PaperAirplaneIcon,
     XIcon,
+    AcademicCapIcon,
+    UserAddIcon
 } from '@heroicons/react/outline'
 import { TypeAnimation } from 'react-type-animation';
 import { RadialTextGradient } from "react-text-gradients-and-animations";
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from "../../../features/store"
-import { addChat } from '@/features/utils';
+import { showItem, addChat } from '@/features/utils';
 import { Bars } from "@agney/react-loading";
+import Modal from "../../comps/Pop"
+import Login from "../../comps/Login"
 
 
 const navigation = [
     { name: 'Home', href: '/home', icon: HomeIcon, current: true },
-    { name: 'Announcements', href: '#', icon: SpeakerphoneIcon, current: false },
-    { name: 'Map', href: 'https://www.google.com/maps/dir/6.6207907,3.3086788/Radiology,+1-5+Oba+Akinjobi+Way,+Ikeja,+Lagos+101233,+Lagos/@6.6072748,3.3050182,14z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x103b9221b8465467:0x48a958aba0f0d779!2m2!1d3.3422326!2d6.5901223?entry=ttu', icon: MapIcon, current: false },
+    { name: 'Announcements', href: '', icon: SpeakerphoneIcon, current: false },
+    { name: 'Map', href: 'https://www.google.com/maps/', icon: MapIcon, current: false },
+    { name: 'Educate', ref: '', icon: AcademicCapIcon, current: false },
+    { name: 'User(Coming Soon..)', href: '', icon: UserAddIcon, current: false },
 ]
 
 function classNames(...classes: any) {
@@ -29,9 +35,16 @@ function classNames(...classes: any) {
 const Page = () => {
     const dispatch = useAppDispatch()
     const chats = useAppSelector((state) => state.utils.chat)
-    const videos = useAppSelector((state) => state.utils.videos)
+    const show = useAppSelector((state) => state.utils.show)
+
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [loading, setLoading] = useState(false)
+
+    const onEducate = () => {
+        dispatch(showItem("educate"))
+    }
+
+
 
     const [value, setValue] = useState({
         text: ""
@@ -156,15 +169,17 @@ const Page = () => {
                                                     <a
                                                         key={item.name}
                                                         href={item.href}
-                                                        target='_blank'
                                                         className={classNames(
                                                             item.current
                                                                 ? 'text-white'
                                                                 : 'text-white ',
                                                             'group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer group-hover:text-gray-500'
                                                         )}
+                                                        onClick={() => item?.name === 'Educate' && onEducate()}
+
                                                     >
                                                         <item.icon
+                                                            onClick={() => item?.name === 'Educate' && onEducate()}
                                                             className={classNames(
                                                                 item.current ? 'text-white group-hover:text-gray-500' : 'text-white group-hover:text-gray-500 ',
                                                                 'mr-4 h-6 w-6 cursor-pointer'
@@ -227,7 +242,6 @@ const Page = () => {
                                             {navigation.map((item) => (
                                                 <a
                                                     key={item.name}
-                                                    target='_blank'
                                                     href={item.href}
                                                     className={classNames(
                                                         item.current
@@ -235,8 +249,10 @@ const Page = () => {
                                                             : 'text-white ',
                                                         'group flex items-center px-2 py-2 text-base font-medium rounded-md cursor-pointer group-hover:text-gray-500'
                                                     )}
+                                                    onClick={() => item?.name === 'Educate' && onEducate()}
                                                 >
                                                     <item.icon
+                                                        onClick={() => item?.name === 'Educate' && onEducate()}
                                                         className={classNames(
                                                             item.current ? 'text-white group-hover:text-gray-500' : 'text-white group-hover:text-gray-500 ',
                                                             'mr-4 h-6 w-6 cursor-pointer'
@@ -298,32 +314,26 @@ const Page = () => {
                         </div>
                         <div className="">
                             <div className="max-w-7xl mx-auto py-4 px-4 sm:px-6 overflow-hidden">
-                                <div className=" py-6 px-4 sm:px-6 lg:px-8 text-white -z-10 ">
-                                    <RadialTextGradient
-                                        className='text-3xl font-bold my-4 lg:text-6xl lg:font-extrabold fade'
-                                        shape={"ellipse"}
-                                        position={"left"}
-                                        colors={["#FF00FF", "#363AED", "#E6E6FA"]}
-                                        animate={true}
-                                        animateDirection={"horizontal"}
-                                        animateDuration={20}
-                                    >
-                                        ...Anything Radiology
-                                    </RadialTextGradient>
+                                <div className=" py-6 text-white -z-10 inline-flex justify-center items-center flex-row ">
+                                    <img
+                                        className=" h-10 w-10 rounded-full mx-2 hidden lg:block"
+                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Light%20Version_qIXTVimd7.png?updatedAt=1708679749597"
+                                        alt="radai"
+                                    />
+                                    <img
+                                        className="block h-24 mx-2"
+                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Group%2036%20(1)_35dAlF8YM.png?updatedAt=1708599967256"
+                                        alt="radai"
+                                    />
                                 </div>
-                                <div>
+                                <div className=''>
                                     <TypeAnimation
                                         preRenderFirstString={true}
                                         sequence={[
                                             500,
-                                            'AI Model, Prompt anything Radiology.',
-                                            1000,
-                                            'AI Model, Connecting Radiologist Together.',
+                                            'AI Model, Prompt for anything Radiology.',
                                             1000,
                                             'AI Model, Trained Models with X-Ray & Tumor Scans.',
-                                            1000,
-                                            'AI Model, Realiable and Futuristic AI Technology.',
-                                            500,
                                         ]}
                                         speed={60}
                                         style={{ fontSize: '1em' }}
@@ -410,6 +420,12 @@ const Page = () => {
                     </div>
                 </div>
             </>
+            {
+                show === "educate" && (<Modal />)
+            }
+            {
+                show === "login" && (<Login />)
+            }
         </>
     )
 }
