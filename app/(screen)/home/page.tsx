@@ -359,7 +359,6 @@ const Page = () => {
                                                             <div className='p-2 rounded-md'>
                                                                 <p className=" p-3 text-sm leading-6 font-medium text-white">
                                                                     {e.resbot.message.split('\n\n').map(obj => JSON.parse(obj.trim()))}
-
                                                                 </p>
                                                             </div>
                                                         </div>
