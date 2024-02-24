@@ -1,19 +1,21 @@
 'use client';
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, Suspense } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import {
-    ArrowUpIcon,
     HomeIcon,
     MapIcon,
     MenuAlt2Icon,
     SpeakerphoneIcon,
+    PaperAirplaneIcon,
     XIcon,
 } from '@heroicons/react/outline'
 import { TypeAnimation } from 'react-type-animation';
 import { RadialTextGradient } from "react-text-gradients-and-animations";
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from "../../../features/store"
-import { showItem } from '@/features/utils';
+import { addChat } from '@/features/utils';
+import { Bars } from "@agney/react-loading";
+
 
 const navigation = [
     { name: 'Home', href: '/home', icon: HomeIcon, current: true },
@@ -25,20 +27,15 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 const Page = () => {
+    const dispatch = useAppDispatch()
+    const chats = useAppSelector((state) => state.utils.chat)
+    const videos = useAppSelector((state) => state.utils.videos)
     const [sidebarOpen, setSidebarOpen] = useState(false)
-    const [user, setUser] = useState(false)
-    const [bot, setBot] = useState(false)
-
-
+    const [loading, setLoading] = useState(false)
 
     const [value, setValue] = useState({
         text: ""
     })
-
-
-    const [display, setDisplay] = useState("")
-    const [response, setResponse] = useState("")
-
 
     const { text } = value
     const onChange = (e: any) => {
@@ -46,11 +43,12 @@ const Page = () => {
     };
 
     const onSubmit = (e: any) => {
-        setValue({ text: '' });
-        setUser(true)
-        setDisplay(text)
         e.preventDefault();
-
+        if (text === "") {
+            return
+        }
+        setValue({ text: '' });
+        setLoading(true)
 
         let data = JSON.stringify({
             "session_id": process.env.NEXT_PUBLIC_SESSION_ID,
@@ -69,14 +67,22 @@ const Page = () => {
 
         axios.request(config)
             .then((response) => {
-                console.log(JSON.stringify(response.data));
-                setBot(true)
-                setResponse(JSON.stringify(response.data.data.bot_response))
+                dispatch(addChat({
+                    main: {
+                        message: text,
+                        type: "user"
+                    },
+                    resbot: {
+                        message: JSON.stringify(response.data.data.bot_response),
+                        type: "bot"
+                    }
+                }))
+
+                setLoading(false)
             })
             .catch((error) => {
                 console.log(error.response.data);
             });
-
 
     }
 
@@ -297,7 +303,7 @@ const Page = () => {
                                         className='text-3xl font-bold my-4 lg:text-6xl lg:font-extrabold fade'
                                         shape={"ellipse"}
                                         position={"left"}
-                                        colors={["#f1f1f1", "#121212", "#363AED"]}
+                                        colors={["#FF00FF", "#363AED", "#E6E6FA"]}
                                         animate={true}
                                         animateDirection={"horizontal"}
                                         animateDuration={20}
@@ -326,57 +332,60 @@ const Page = () => {
                                     />
                                 </div>
 
-                                <div>
-                                    {user && (
-                                        <div className="left-0 bg-transparent  m-2 max-w-7xl">
-                                            <dt>
-                                                <div className="flex items-center justify-start  w-full rounded-md text-white z-50">
-                                                    <img
-                                                        className="inline-block h-10 w-10 rounded-full"
-                                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/image%20118_iuFOihe50.png?updatedAt=1708616403272"
-                                                        alt="radai"
-                                                    />
-                                                    <p className="mx-2 text-base leading-6 font-medium text-white">{display}</p>
-                                                </div>
+                                <div className='mb-40 snap-y'>
+                                    <div className="left-0 bg-transparent  m-2 max-w-7xl">
+                                        <dt>
+                                            {chats && chats.map((e) => (
+                                                <>
+                                                    <Suspense fallback={<div />} key={e.main.type}>
+                                                        <div className="flex items-center justify-start w-full rounded-md text-white z-50">
+                                                            <img
+                                                                className="inline-block h-10 w-10 rounded-full"
+                                                                src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/image%20118_iuFOihe50.png?updatedAt=1708616403272"
+                                                                alt="radai"
+                                                            />
+                                                            <div className='p-2 rounded-md'>
+                                                                <p className="mx-2 text-sm leading-6 font-medium text-white">{e.main.message}</p>
+                                                            </div>
+                                                        </div>
+                                                    </Suspense>
+                                                    <Suspense fallback={<div />} key={e.resbot.type}>
+                                                        <div className='flex items-center justify-end rounded-md text-white w-full' >
+                                                            <img
+                                                                className="inline-block h-10 w-10 rounded-full"
+                                                                src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Light%20Version_qIXTVimd7.png?updatedAt=1708679749597"
+                                                                alt="radai"
+                                                            />
+                                                            <p className=" p-3 rounded-md mx-2 text-sm leading-6 font-medium text-white">
+                                                                <TypeAnimation
+                                                                    preRenderFirstString={true}
+                                                                    sequence={[
+                                                                        500,
+                                                                        `${e.resbot.message}`,
+                                                                    ]}
+                                                                    speed={60}
+                                                                    style={{ fontSize: '1em' }}
+                                                                    repeat={Infinity}
+                                                                    className='py-4 text-white bg-transparent'
+                                                                />
+                                                            </p>
+                                                        </div>
 
-                                            </dt>
+                                                    </Suspense>
+                                                </>
+                                            ))}
+                                            {loading && (
+                                                <Bars
+                                                    className=" text-purple-600 text-center"
+                                                    width="20"
+                                                />
+                                            )}
+                                        </dt>
+                                    </div>
 
-                                        </div>
-                                    )}
-
-
-                                    {bot && (
-                                        <div className="right-0  bg-transparent z-50 m-2 max-w-7xl">
-                                            <dt>
-                                                <div className="flex items-center justify-end rounded-md text-white  w-full">
-                                                    <img
-                                                        className="inline-block h-10 w-10 rounded-full"
-                                                        src="https://ik.imagekit.io/ubdvpx7xd0j/Radai/Light%20Version_qIXTVimd7.png?updatedAt=1708679749597"
-                                                        alt="radai"
-                                                    />
-                                                    <p className="mx-2 text-base leading-6 font-medium text-white">
-                                                        <TypeAnimation
-                                                            preRenderFirstString={true}
-                                                            sequence={[
-                                                                500,
-                                                                `${response}`,
-                                                            ]}
-                                                            speed={60}
-                                                            style={{ fontSize: '1em' }}
-                                                            repeat={Infinity}
-                                                            className='py-4 text-white bg-transparent'
-                                                        />
-
-
-                                                    </p>
-                                                </div>
-
-                                            </dt>
-
-                                        </div>
-                                    )}
 
                                 </div>
+
 
 
                                 <div className='fixed bottom-0 w-full lg:w-5/6 flex justify-center items-center  py-4 px-4 sm:px-6'>
@@ -400,7 +409,7 @@ const Page = () => {
                                         onClick={onSubmit}
                                         className="inline-flex mx-2 items-center bg-transparent border-2 border-indigo-500  cursor-pointer px-6 py-4 text-base font-medium rounded-md shadow-sm text-white outline-none "
                                     >
-                                        <ArrowUpIcon className='w-8 h-8 text-white  bg-transparent cursor-pointer ' />
+                                        <PaperAirplaneIcon className='w-8 h-8 text-white  bg-transparent cursor-pointer ' />
                                     </button>
 
 
